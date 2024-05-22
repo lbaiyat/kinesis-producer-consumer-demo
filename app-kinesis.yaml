@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyKinesisStream:
+    Type: AWS::Kinesis::Stream
+    Properties:
+      Name: MyKinesisStream
+      ShardCount: 1
+
+  MyKinesisProducerIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: kinesis.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: KinesisProducerPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - kinesis:PutRecord
+                  - kinesis:PutRecords
+                Resource: !GetAtt MyKinesisStream.Arn
+
+  MyKinesisProducer:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: index.handler
+      Role: !GetAtt MyKinesisProducerIAMRole.Arn
+      Environment:
+        Variables:
+          KINESIS_STREAM_NAME: !Ref MyKinesisStream
+      Timeout: 60
+
+  MyKinesisConsumerIAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: kinesis.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: KinesisConsumerPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - kinesis:GetRecords
+                  - kinesis:GetShardIterator
+                  - kinesis:DescribeStream
+                  - kinesis:ListStreams
+                Resource: !GetAtt MyKinesisStream.Arn
+
+  MyKinesisConsumer:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: index.handler
+      Role: !GetAtt MyKinesisConsumerIAMRole.Arn
+      Environment:
+        Variables:
+          KINESIS_STREAM_NAME: !Ref MyKinesisStream
+      Timeout: 60
+
+Outputs:
+  MyKinesisStreamARN:
+    Value: !GetAtt MyKinesisStream.Arn
+  MyKinesisProducerFunctionARN:
+    Value: !GetAtt MyKinesisProducer.Arn
+  MyKinesisConsumerFunctionARN:
+    Value: !GetAtt MyKinesisConsumer.Arn

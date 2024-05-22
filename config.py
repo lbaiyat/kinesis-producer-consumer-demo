@@ -1,0 +1,2 @@
+CLOUDFORMATION_STACK_NAME = 'MyCloudFormationAppStack'
+CLOUDFORMATION_TEMPLATE_FILE = 'app-kinesis.yaml'
