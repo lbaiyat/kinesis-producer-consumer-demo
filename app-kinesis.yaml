@@ -27,15 +27,6 @@ Resources:
                   - kinesis:PutRecords
                 Resource: !GetAtt MyKinesisStream.Arn
 
-  MyKinesisProducer:
-    Type: AWS::Lambda::Function
-    Properties:
-      Handler: index.handler
-      Role: !GetAtt MyKinesisProducerIAMRole.Arn
-      Environment:
-        Variables:
-          KINESIS_STREAM_NAME: !Ref MyKinesisStream
-      Timeout: 60
 
   MyKinesisConsumerIAMRole:
     Type: AWS::IAM::Role
@@ -60,20 +51,6 @@ Resources:
                   - kinesis:ListStreams
                 Resource: !GetAtt MyKinesisStream.Arn
 
-  MyKinesisConsumer:
-    Type: AWS::Lambda::Function
-    Properties:
-      Handler: index.handler
-      Role: !GetAtt MyKinesisConsumerIAMRole.Arn
-      Environment:
-        Variables:
-          KINESIS_STREAM_NAME: !Ref MyKinesisStream
-      Timeout: 60
-
 Outputs:
   MyKinesisStreamARN:
     Value: !GetAtt MyKinesisStream.Arn
-  MyKinesisProducerFunctionARN:
-    Value: !GetAtt MyKinesisProducer.Arn
-  MyKinesisConsumerFunctionARN:
-    Value: !GetAtt MyKinesisConsumer.Arn

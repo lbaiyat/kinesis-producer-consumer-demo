@@ -14,7 +14,7 @@ def create_boto_session():
     )
     return session
 
-def create_kinesis_stream(stack_name, template_file, session):
+def create_kinesis_stack(stack_name, template_file, session):
     cloudformation = session.client('cloudformation')
 
     with open(template_file, 'r') as file:
@@ -28,3 +28,9 @@ def create_kinesis_stream(stack_name, template_file, session):
 
     return response
 
+def delete_kinesis_stack(stack_name, session):
+    cloudformation = session.client('cloudformation')
+    response = cloudformation.delete_stack(
+        StackName=stack_name
+    )
+    return response
