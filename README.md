@@ -62,10 +62,6 @@ python3 producer.py;
 Once the stream producer is running, you should see logs of the data being produced to the stream:
 </p>
 
-<div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-Put record: {'ShardId': 'shardId-000000000000', 'SequenceNumber': '49652411685917646928842325588740043300897428992379846658', 'ResponseMetadata': {'RequestId': 'd2178a59-a07c-325b-8cda-0734be33d144', 'HTTPStatusCode': 200, 'HTTPHeaders': {'x-amzn-requestid': 'd2178a59-a07c-325b-8cda-0734be33d144', 'x-amz-id-2': 'kufC0GJv4s1nZpdCYcj5BFQbc9YmRsDUhI65rQNBi6Dp3bP8+tNco8IJuGzUuIdfdSA52rapo2xft9+5uVDZZzhVEHHBIABp', 'date': 'Sun, 26 May 2024 19:19:09 GMT', 'content-type': 'application/x-amz-json-1.1', 'content-length': '110', 'connection': 'keep-alive'}, 'RetryAttempts': 0}}
-</div>
-
 <h3>
 Run the stream consumer
 </h3>
@@ -76,15 +72,6 @@ python3 consumer.py;
 Once the stream consumer is running, you should see logs of the data being consumed from the stream:
 </p>
 
-<div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-Received record: {'event': 'sample_event', 'value': 'sample_value', 'timestamp': 1716751145}
-Received record: {'event': 'sample_event', 'value': 'sample_value', 'timestamp': 1716751146}
-Received record: {'event': 'sample_event', 'value': 'sample_value', 'timestamp': 1716751147}
-Received record: {'event': 'sample_event', 'value': 'sample_value', 'timestamp': 1716751148}
-Received record: {'event': 'sample_event', 'value': 'sample_value', 'timestamp': 1716751149}
-Received record: {'event': 'sample_event', 'value': 'sample_value', 'timestamp': 1716751150}
-Received record: {'event': 'sample_event', 'value': 'sample_value', 'timestamp': 1716751151}
-</div>
 </div>
 
 
