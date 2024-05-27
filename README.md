@@ -81,6 +81,7 @@ python3 producer.py;
 <p style="font-size: 13px; padding-left: 5px;">
 Once the stream producer is running, you should see logs of the data being produced to the stream:
 </p>
+<img src="img/producer-logs.png">
 
 <h3 id="run-the-stream-consumer">
 Run the stream consumer
@@ -91,13 +92,15 @@ python3 consumer.py;
 <p style="font-size: 13px; padding-left: 5px;">
 Once the stream consumer is running, you should see logs of the data being consumed from the stream:
 </p>
+<img src="img/consumer-logs.png">
+
 
 </div>
 
 <div style="border-left: 1px solid #ccc; padding-left: 12px;" id="cleanup">
 <h2>Cleanup:</h2>
 <p style="font-size: 15px">
-Once you are done with the Kinesis Data Stream, you may wish to delete the instance to stop incurring further charges.
+Once you are done with the Kinesis Data Stream, you should delete the instance to stop incurring further charges.
 </p>
 
 <h3 id="delete-the-kinesis-data-stream-with-the-stream-manager-script">
